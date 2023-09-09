@@ -1,7 +1,11 @@
+data "external" "config_data" {
+  program = ["python", "${path.module}/get_github_token.py"]
+}
+
 provider "aws" {
   region     = "ap-northeast-2"
-  access_key = "PUT-YOUR_ACCESS_KEY_HERE"
-  secret_key = "PUT-YOUR_SECRET_KEY_HERE"
+  access_key = data.external.config_data.result["aws_access_key"]
+  secret_key = data.external.config_data.result["aws_secret_key"]
 }
 
 
