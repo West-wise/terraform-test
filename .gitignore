@@ -14,8 +14,6 @@ bin/
 # config 파일
 config.*
 
-# 키 추출 .py
-get_config.py
 
 # terraform provider plugin폴더
 .terraform/
