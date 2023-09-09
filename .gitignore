@@ -17,3 +17,6 @@ config.*
 
 # terraform provider plugin폴더
 .terraform/
+
+#terraform 키 추출 스크립트
+get_config.py
