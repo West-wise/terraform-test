@@ -4,8 +4,17 @@ data "external" "config_data" {
 
 provider "aws" {
   region     = "ap-northeast-2"
-  access_key = data.external.config_data.result["aws_access_key"]
-  secret_key = data.external.config_data.result["aws_secret_key"]
+  # access_key = data.external.config_data.result["aws_access_key"]
+  # secret_key = data.external.config_data.result["aws_secret_key"]
+}
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  }
 }
 
 
@@ -21,8 +30,4 @@ provider "aws" {
 resource "aws_instance" "myec2-test" {
   ami = "ami-094efa69961183fa4"
   instance_type = "t2.micro"
-
-  tags = {
-    Name = "my-first-ec2"
-  }
 }
