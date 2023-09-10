@@ -19,6 +19,7 @@ resource "aws_security_group" "allow_tls" {
     to_port          = 443
     protocol         = "tcp"
     cidr_blocks      = ["${aws_eip.lb.public_ip}/32"] #이 블록에서 IP주소를 계산해야 한다. 중요!
+    #cidr_blocks      = [var.vpc_ip]
     #원치않는 블록 제거
   }
 
