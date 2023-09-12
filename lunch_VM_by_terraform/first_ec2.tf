@@ -17,11 +17,29 @@ terraform {
   }
 }
 
+
+locals{
+  common_tags = {
+    Owner = "DevOps Team"
+    service = "backend"
+  }
+}
+
+locals{
+  name_prefix = "${var.name != "" ? var.name : var.default}"
+  instance_ids = concat(aws_instance.blue.*.id,aws_instance.green.*.id)
+}
 variable "elb_names"{
   type = list
   default = ["dev-loadbalancer", "statg-loadbalancer", "prod-loadbalancer"]
 }
 
+
+resource "aws_instance" "app_dev" {
+  ami = "ami-082b5a644766e0e6f"
+  instance_type = "t2.micro"
+  tags = local.common_tags
+}
 resource "aws_iam_user" "name" {
   name = var.elb_names[count.index]
   count = 3
